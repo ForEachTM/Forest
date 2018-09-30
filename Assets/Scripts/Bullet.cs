@@ -33,15 +33,9 @@ public class Bullet : MonoBehaviour {
        
         if (collider.gameObject.tag != "Player")
         {
-            if (collider.gameObject.tag == "Mob")
-            {
-                Destroy(gameObject);
-            }
-            else
-            {
-                velocity *= -1;
-            }
-
+           
+           Destroy(gameObject);
+            
         }
     }
 
