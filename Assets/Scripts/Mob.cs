@@ -8,13 +8,33 @@ public class Mob : MonoBehaviour {
 
     private Transform target;
 
+    private bool facingRight = false;
+
     // Use this for initialization
     void Start () {
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    private void Flip()
+    {
+        Vector3 scale = transform.localScale;
+
+        if (target.position.x > transform.position.x && !facingRight || target.position.x < transform.position.x && facingRight)
+        {
+            facingRight = !facingRight;
+
+            scale.x *= -1;
+
+            transform.localScale = scale;
+        }
+
+
+    }
+
+    // Update is called once per frame
+    void Update () {
+        Flip();
+
         transform.position = Vector2.MoveTowards(transform.position, target.position, velocity * Time.deltaTime);
 	}
 

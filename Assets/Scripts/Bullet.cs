@@ -30,10 +30,17 @@ public class Bullet : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D collider)
     {
+       
         if (collider.gameObject.tag != "Player")
         {
-            direction *= -1;
-            //Destroy(gameObject);
+            if (collider.gameObject.tag == "Mob")
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                velocity *= -1;
+            }
 
         }
     }

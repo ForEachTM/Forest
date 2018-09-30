@@ -8,9 +8,13 @@ public class Player : MonoBehaviour {
 
     public double health;
 
+    public Animator animator;
+
     private Rigidbody2D rigidbody2D;
 
     private Vector2 velocity;
+
+    private bool facingRight;
 
 	// Use this for initialization
 	void Start () {
@@ -24,9 +28,27 @@ public class Player : MonoBehaviour {
 		
         Vector2 moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-
         velocity = moveInput.normalized * Speed;
 
+        animator.SetFloat("Velocity", Mathf.Abs(moveInput.x)+Mathf.Abs(moveInput.y));
+
+        Flip();
+    }
+
+    private void Flip()
+    {
+        Vector3 scale = transform.localScale;
+
+        if (velocity.x > 0 && !facingRight || velocity.x < 0 && facingRight)
+        {
+            facingRight = !facingRight;
+            
+            scale.x *= -1;
+
+            transform.localScale = scale;
+        }
+
+ 
     }
 
     private void FixedUpdate(){
