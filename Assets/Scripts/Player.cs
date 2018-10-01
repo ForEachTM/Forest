@@ -34,31 +34,15 @@ public class Player : MonoBehaviour {
 
         animator.SetFloat("Velocity", Mathf.Abs(moveInput.x)+Mathf.Abs(moveInput.y));
 
-        //Flip();
-        BetterFlip();
+        Flip();
+        
     }
 
     private void Flip()
     {
-        Vector3 scale = transform.localScale;
-
         if (velocity.x > 0 && !facingRight || velocity.x < 0 && facingRight)
         {
-            facingRight = !facingRight;
-            
-            scale.x *= -1;
-
-            transform.localScale = scale;
-        }
-
- 
-    }
-
-    private void BetterFlip()
-    {
-        if (velocity.x > 0 && !facingRight || velocity.x < 0 && facingRight)
-        {
-            render.flipX = facingRight = !render.flipX;
+            render.flipX = facingRight = !facingRight;
         }
     }
 
@@ -67,6 +51,11 @@ public class Player : MonoBehaviour {
         rigidbody2D.MovePosition(rigidbody2D.position + velocity * Time.fixedDeltaTime);
 
     }
+
+    public Vector2 GetVel()
+    {
+        return velocity;
+    } 
 
     void OnTriggerStay2D(Collider2D collider)
     {

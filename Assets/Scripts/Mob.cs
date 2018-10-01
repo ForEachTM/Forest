@@ -8,24 +8,22 @@ public class Mob : MonoBehaviour {
 
     private Transform target;
 
+    private SpriteRenderer render;
+
     private bool facingRight = false;
 
     // Use this for initialization
     void Start () {
+        render = GetComponent<SpriteRenderer>();
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
     }
 
     private void Flip()
     {
-        Vector3 scale = transform.localScale;
 
         if (target.position.x > transform.position.x && !facingRight || target.position.x < transform.position.x && facingRight)
         {
-            facingRight = !facingRight;
-
-            scale.x *= -1;
-
-            transform.localScale = scale;
+            render.flipX = facingRight = !facingRight;
         }
 
 

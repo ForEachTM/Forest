@@ -23,9 +23,9 @@ public class Bullet : MonoBehaviour {
         transform.up = direction;
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        transform.position += direction * velocity * Time.deltaTime;
+        transform.position += direction * velocity * Time.fixedDeltaTime;
     }
 
     void OnTriggerEnter2D(Collider2D collider)
