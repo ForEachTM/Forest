@@ -8,41 +8,21 @@ public class CameraController : MonoBehaviour {
 
     public float velocity;
 
-    private Vector3 targetPosition;
+    private Vector3 targetPosition, mousePosition;
 
-    public float minX, minY, maxX, maxY;
-
-    private float PPU = 100f;
+    public Vector2 min, max;
 
 	// Use this for initialization
 	void Start () {
-        minX /= PPU;
-        minY /= PPU;
 
-        maxX /= PPU;
-        maxY /= PPU;
     }
 	
     void Update()
     {
-        transform.position = new Vector3(Mathf.Clamp(transform.position.x, -8f, 8f), Mathf.Clamp(transform.position.y, -5f, 5f),-10f);
-
-        /*if (transform.position.x <= minX)
-        {
-            transform.position = new Vector3(minX, transform.position.y, -10f);
-        }else if (transform.position.x >= maxX)
-        {
-            transform.position = new Vector3(maxX, transform.position.y, -10f);
-        }
-
-        if (transform.position.y <= minY)
-        {
-            transform.position = new Vector3(transform.position.x, minY, -10f);
-        }
-        else if (transform.position.y >= maxY)
-        {
-            transform.position = new Vector3(transform.position.x, maxY, -10f);
-        }*/
+        mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition.x *= 0.0625f;
+        mousePosition.y *= 0.125f;
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x, min.x, max.x), Mathf.Clamp(transform.position.y, min.y, max.y),-10f);
     }
 
 	// Update is called once per frame
@@ -50,7 +30,7 @@ public class CameraController : MonoBehaviour {
 
         targetPosition = new Vector3(followTarget.transform.position.x, followTarget.transform.position.y, -10f);
 
-        transform.position = Vector3.Lerp(transform.position,targetPosition,velocity*Time.fixedDeltaTime);
+        transform.position = Vector3.Lerp(transform.position + mousePosition,targetPosition,velocity*Time.fixedDeltaTime);
 
 	}
 }

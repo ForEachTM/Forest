@@ -14,7 +14,7 @@ public class Player : MonoBehaviour {
 
     private Vector2 velocity;
 
-    private bool facingRight;
+    private bool facingRight = false;
 
 	// Use this for initialization
 	void Start () {
