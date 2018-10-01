@@ -12,6 +12,8 @@ public class Player : MonoBehaviour {
 
     private Rigidbody2D rigidbody2D;
 
+    private SpriteRenderer render;
+
     private Vector2 velocity;
 
     private bool facingRight = false;
@@ -20,7 +22,7 @@ public class Player : MonoBehaviour {
 	void Start () {
 
         rigidbody2D = GetComponent<Rigidbody2D>();
-
+        render = GetComponent<SpriteRenderer>();
 	}
 	
 	// Update is called once per frame
@@ -32,7 +34,8 @@ public class Player : MonoBehaviour {
 
         animator.SetFloat("Velocity", Mathf.Abs(moveInput.x)+Mathf.Abs(moveInput.y));
 
-        Flip();
+        //Flip();
+        BetterFlip();
     }
 
     private void Flip()
@@ -49,6 +52,14 @@ public class Player : MonoBehaviour {
         }
 
  
+    }
+
+    private void BetterFlip()
+    {
+        if (velocity.x > 0 && !facingRight || velocity.x < 0 && facingRight)
+        {
+            render.flipX = facingRight = !render.flipX;
+        }
     }
 
     private void FixedUpdate(){
