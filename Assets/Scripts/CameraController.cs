@@ -10,16 +10,18 @@ public class CameraController : MonoBehaviour {
 
     public Vector2 min, max;
 
-	// Use this for initialization
-	void Start () {
+    public float distanceMultiplier;
+
+   // Use this for initialization
+   void Start () {
         
     }
 	
     void Update()
     {
         mousePosition = Input.mousePosition;
-        mousePosition.x = (mousePosition.x - Screen.width / 2) * 0.005f;
-        mousePosition.y = (mousePosition.y - Screen.height / 2) * 0.005f;
+        mousePosition.x = (mousePosition.x - Screen.width / 2) * distanceMultiplier;
+        mousePosition.y = (mousePosition.y - Screen.height / 2) * distanceMultiplier;
 
         Debug.Log(mousePosition);
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, min.x, max.x),
