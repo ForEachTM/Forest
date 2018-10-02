@@ -23,7 +23,7 @@ public class CameraController : MonoBehaviour {
         mousePosition.x = (mousePosition.x - Screen.width / 2) * distanceMultiplier;
         mousePosition.y = (mousePosition.y - Screen.height / 2) * distanceMultiplier;
 
-        Debug.Log(mousePosition);
+        //Debug.Log(mousePosition);
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, min.x, max.x),
             Mathf.Clamp(transform.position.y, min.y, max.y),-10f);
     }
